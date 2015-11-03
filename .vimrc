@@ -14,6 +14,8 @@ endif
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'godlygeek/tabular'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/AutoClose'
@@ -79,7 +81,7 @@ if has("win32")
 	set guifont=YaHei\ Consolas\ Hybrid:h12
 	source $VIMRUNTIME/delmenu.vim
 	source $VIMRUNTIME/menu.vim
-	source $VIMRUNTIME/vimrc_example.vim
+    source $VIMRUNTIME/vimrc_example.vim
 	source $VIMRUNTIME/mswin.vim
 	behave mswin
 	language messages zh_CN.utf-8
@@ -104,7 +106,6 @@ let g:miniBufExplBuffersNeeded = 1
 set wildmode=longest,list
 set wildmenu
 set completeopt=longest,menu
-set noswapfile
 set clipboard=unnamed
 set ruler
 ""按下tab就自补全
@@ -225,3 +226,5 @@ set showmatch
 colorscheme molokai
 highlight OverLength ctermbg=red ctermfg=white guibg=#660000
 match OverLength /\%81v.\+/
+set noswapfile
+set nobackup

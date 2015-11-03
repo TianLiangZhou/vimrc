@@ -199,9 +199,16 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+        \ "mode": "active",
+        \ "active_filetypes": ["php", "js", "html", "css"],
+        \ "passive_filetypes": ["puppet"] }
+let g:syntastic_php_checkers = ["php", "phpcs"]
+let g:syntastic_php_phpcs_args = "--standard=zend -n --report=csv"
+let g:syntastic_loc_list_height=5
 nmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a& :Tabularize /&<CR>
 nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
@@ -221,7 +228,7 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 set showmatch
 colorscheme molokai
 highlight OverLength ctermbg=red ctermfg=white guibg=#660000
-match OverLength /\%81v.\+/
+match OverLength /\%121v.\+/
 set noswapfile
 set nobackup
 " auto comment newline
@@ -244,3 +251,4 @@ nnoremap gf <C-^>
 
 set splitbelow                                  " splits go below w/focus
 set splitright                                  " vsplits go right w/focus
+set ff=unix

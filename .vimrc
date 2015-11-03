@@ -188,8 +188,6 @@ endif
 let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,php EmmetInstall
-"quickly edit _vimrc
-nmap ,v :e $VIM/_vimrc
 "自动更改当前文件所在目录
 autocmd BufEnter * lcd %:p:h
 nmap tag :TagbarToggle <CR>
@@ -205,7 +203,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let mapleader = ','
 nmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a& :Tabularize /&<CR>
 nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
@@ -228,3 +225,23 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#660000
 match OverLength /\%81v.\+/
 set noswapfile
 set nobackup
+" auto comment newline
+augroup AutoBlockComment
+    autocmd! FileType c,cpp setlocal comments -=:// comments +=f://
+augroup END
+" Quickly edit/source .vimrc
+if has("win32")
+noremap <leader>ve :edit $VIM/_vimrc<CR>
+noremap <leader>vs :source $VIM/_vimrc<CR>
+else
+noremap <leader>ve :edit $HOME/.vimrc<CR>
+noremap <leader>vs :source $HOME/.vimrc<CR>
+endif
+" Buffers, preferred over tabs now with bufferline.
+nnoremap gn :bnext<CR>
+nnoremap gN :bprevious<CR>
+nnoremap gd :bdelete<CR>
+nnoremap gf <C-^>
+
+set splitbelow                                  " splits go below w/focus
+set splitright                                  " vsplits go right w/focus

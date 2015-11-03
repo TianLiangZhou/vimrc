@@ -1,3 +1,54 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
+if has("win32")
+set rtp+=~/vimfiles/bundle/Vundle.vim/
+call vundle#begin('~/vimfiles/')
+else
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+endif
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'ervandew/supertab'
+Plugin 'vim-scripts/AutoClose'
+Plugin 'vim-scripts/grep.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tomtom/checksyntax_vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'tpope/vim-fugitive'
+Plugin 'majutsushi/tagbar'
+Plugin 'msanders/snipmate.vim'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-surround'
+Plugin 'tomasr/molokai'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'mtth/scratch.vim'
+Plugin 'greplace.vim'
+Plugin 'flazz/vim-colorschemes'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 set ts=4
 set tabstop=4
 set softtabstop=4
@@ -17,11 +68,8 @@ set incsearch
 set hlsearch
 set showmatch
 set shortmess=atl
-
-
 set nu
 set autochdir
-
 set encoding=utf-8
 set fileencodings=utf-8,gbk,cp936,latin-1
 set fileencoding=utf-8
@@ -40,6 +88,12 @@ if exists("tags")
 	set tags=./tags
 endif
 map <C-e> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 noremap <C-TAB>   :MBEbf<CR>
 noremap <C-S-TAB> :MBEbb<CR>
 nmap mbe :MBEOpen<cr>
@@ -57,21 +111,18 @@ set ruler
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 let g:SuperTabRetainCompletionType=2
 "grep搜索快捷键
-"nnoremap <silent> <F3> :Grep<CR>
+nnoremap <silent> <F3> :Grep<CR>
 ""设置注释的leader
 let mapleader=","
-"设置ememt插件
-"let g:user_emmet_expandabbr_key = '<c-e>'
-"let g:use_emmet_complete_tag = 1
 ""设置快捷生成ctags文件
 nmap cts :!ctags -R * --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 "设置折叠模式
-"set foldenable              " 开始折叠
-""indent marker syntax
+set foldenable
+"indent marker syntax
 set foldmethod=marker       " 设置语法折叠 manual, indent, expr, syntax, diff, marker
-"set foldcolumn=0           " 设置折叠区域的宽度
-"setlocal foldlevel=1        " 设置折叠层数为
-""set foldclose=all          " 设置为自动关闭折叠                            
+set foldcolumn=0           " 设置折叠区域的宽度
+setlocal foldlevel=1        " 设置折叠层数为
+set foldclose=all          " 设置为自动关闭折叠                            
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 "自动加载外部修改内容
 set autoread
@@ -132,6 +183,8 @@ if has("gui_running")
     hi CursorColumn  guibg=#333333
 endif
 "emment.vim
+"let g:user_emmet_expandabbr_key = '<c-e>'
+let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,php EmmetInstall
 "quickly edit _vimrc
@@ -168,56 +221,7 @@ nmap <Leader>a,, :Tabularize /,\zs<CR>
 vmap <Leader>a,, :Tabularize /,\zs<CR>
 nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
-
 set showmatch
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-scripts/The-NERD-tree'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/AutoClose'
-Plugin 'vim-scripts/grep.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tomtom/checksyntax_vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'tpope/vim-fugitive'
-Plugin 'majutsushi/tagbar'
-Plugin 'msanders/snipmate.vim'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-surround'
-Plugin 'tomasr/molokai'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'mtth/scratch.vim'
-Plugin 'greplace.vim'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
 colorscheme molokai
 highlight OverLength ctermbg=red ctermfg=white guibg=#660000
 match OverLength /\%81v.\+/
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line

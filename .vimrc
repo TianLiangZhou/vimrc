@@ -2,8 +2,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
 if has("win32")
-set rtp+=~/vimfiles/bundle/Vundle.vim/
-call vundle#begin('~/vimfiles/')
+set rtp+=%HOME%/vimfiles/bundle/Vundle.vim/
+call vundle#begin('%USERPROFILE%/vimfiles/bundle/')
 else
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()

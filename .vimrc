@@ -231,6 +231,7 @@ highlight OverLength ctermbg=red ctermfg=white guibg=#660000
 match OverLength /\%121v.\+/
 set noswapfile
 set nobackup
+set noundofile
 " auto comment newline
 augroup AutoBlockComment
     autocmd! FileType c,cpp setlocal comments -=:// comments +=f://
